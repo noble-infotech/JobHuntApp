@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LocalJobs — Hyderabad</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="app">
+    <!-- HEADER -->
+    <div class="header">
+      <div class="logo">Local<span>Jobs</span> — Hyderabad</div>
+      <div class="date-out" id="date-out"></div>
+    </div>
+
+    <!-- TAB BAR -->
+    <div class="tab-bar">
+      <button class="tab active" onclick="switchTab('browse', this)">Browse jobs</button>
+      <button class="tab" onclick="switchTab('post', this)">Post a job</button>
+    </div>
+
+    <!-- BROWSE VIEW -->
+    <div id="browse-view">
+      <div class="search-row">
+        <input type="text" id="search" placeholder="Search by title or company..." oninput="render()" />
+        <select id="filter-type" onchange="render()">
+          <option value="">All types</option>
+          <option>Full-time</option>
+          <option>Part-time</option>
+          <option>Contract</option>
+          <option>Internship</option>
+        </select>
+        <select id="filter-loc" onchange="render()">
+          <option value="">All areas</option>
+        </select>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="label">Total listings</div>
+          <div class="value" id="stat-total">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="label">Full-time</div>
+          <div class="value" id="stat-ft">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="label">Areas</div>
+          <div class="value" id="stat-loc">0</div>
+        </div>
+      </div>
+
+      <div id="job-list"></div>
+    </div>
+
+    <!-- POST VIEW -->
+    <div id="post-view" style="display:none;">
+      <div class="form-section">
+        <p class="form-heading">Add a new listing</p>
+        <div class="form-grid">
+          <div class="form-field">
+            <label>Job title</label>
+            <input id="f-title" placeholder="e.g. Sales Executive" />
+          </div>
+          <div class="form-field">
+            <label>Company name</label>
+            <input id="f-company" placeholder="e.g. Ramesh & Sons" />
+          </div>
+          <div class="form-field">
+            <label>Job type</label>
+            <select id="f-type">
+              <option>Full-time</option>
+              <option>Part-time</option>
+              <option>Contract</option>
+              <option>Internship</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label>Area / locality</label>
+            <input id="f-loc" placeholder="e.g. Ameerpet" />
+          </div>
+          <div class="form-field">
+            <label>Salary (per month)</label>
+            <input id="f-salary" placeholder="e.g. ₹25,000" />
+          </div>
+          <div class="form-field">
+            <label>Contact / WhatsApp</label>
+            <input id="f-contact" placeholder="e.g. 9876543210" />
+          </div>
+          <div class="form-field full">
+            <label>Job description</label>
+            <textarea id="f-desc" placeholder="Describe the role, responsibilities, and requirements..."></textarea>
+          </div>
+        </div>
+        <button class="submit-btn" onclick="postJob()">Post job</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JOB DETAIL MODAL -->
+  <div class="modal-bg" id="modal-bg" onclick="closeModal(event)">
+    <div class="modal" id="modal">
+      <button class="close-btn" onclick="closeModal()">&#x2715;</button>
+      <div class="modal-title" id="m-title"></div>
+      <div class="modal-company" id="m-company"></div>
+      <div class="job-meta" id="m-meta"></div>
+      <div class="modal-section">
+        <strong>About the role</strong>
+        <span id="m-desc"></span>
+      </div>
+      <div class="modal-section">
+        <strong>Contact</strong>
+        <span id="m-contact"></span>
+      </div>
+      <button class="apply-btn" id="m-apply">Apply via WhatsApp</button>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast">Job posted successfully!</div>
+
+  <script src="app.js"></script>
+</body>
+</html>
